@@ -29,21 +29,9 @@ public class GetBig : MonoBehaviour
 	{
 		if(Input.GetKeyDown(KeyCode.M))
 		{
-			PlayerGetBig(true);	
-		}
-		if(Input.GetKey(KeyCode.N))
-		{
-			PlayerGetBig(false);
-		}
-	}
-
-	private void PlayerGetBig(bool big)
-	{
-		if(big)
-		{
 			GetBiggie();
 		}
-		else
+		if(Input.GetKey(KeyCode.N))
 		{
 			GetSmol();
 		}
