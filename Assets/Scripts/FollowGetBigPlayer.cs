@@ -41,6 +41,12 @@ public class FollowGetBigPlayer : MonoBehaviour
 
 	private void HandleSpeedChanged(object sender, GetBigSpeedArgs e)
 	{
-		maxSpeed = e.Speed;
+		StartCoroutine(DelayCatchUp(e.Speed));
+	}
+
+	private IEnumerator DelayCatchUp(float newSpeed)
+	{
+		yield return new WaitForSeconds(1f);
+		maxSpeed = newSpeed;
 	}
 }
