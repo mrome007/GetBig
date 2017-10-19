@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\FollowGetBigPlayer.cs" />
      <Compile Include="Assets\Scripts\GetBig.cs" />
      <Compile Include="Assets\Scripts\GetBigMovement.cs" />
+     <Compile Include="Assets\Scripts\GetBigSpeedArgs.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity5.6.2f1/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

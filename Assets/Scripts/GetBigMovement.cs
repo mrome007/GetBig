@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ public class GetBigMovement : MonoBehaviour
 	private float horizontalSpeed;
 	private float verticalSpeed;
 	private Vector3 movementVector;
+
+	public event EventHandler<GetBigSpeedArgs> SpeedChanged;
 
 	private void Start()
 	{
@@ -40,5 +43,6 @@ public class GetBigMovement : MonoBehaviour
 	public void SetMaxSpeed(float newSpeed)
 	{
 		MaxSpeed = newSpeed < 0.1f ? 0.1f : newSpeed;
+		SpeedChanged(this, new GetBigSpeedArgs(MaxSpeed));
 	}
 }
