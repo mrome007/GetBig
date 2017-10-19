@@ -31,7 +31,7 @@ public class GetBig : MonoBehaviour
 		{
 			GetBiggie();
 		}
-		if(Input.GetKey(KeyCode.N))
+		if(Input.GetKeyDown(KeyCode.N))
 		{
 			GetSmol();
 		}
@@ -39,6 +39,7 @@ public class GetBig : MonoBehaviour
 
 	private void GetBiggie()
 	{
+		getBigMovement.SetMaxSpeed(1f);
 		if(Resources > 0)
 		{
 			transform.localScale += scaleFactor;
@@ -48,6 +49,7 @@ public class GetBig : MonoBehaviour
 
 	private void GetSmol()
 	{
+		getBigMovement.SetMaxSpeed(5f);
 		if(transform.localScale.x > 0.1f)
 		{
 			transform.localScale -= smolScaleFactor;

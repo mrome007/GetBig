@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class GetBigMovement : MonoBehaviour 
 {
-	public float MaxSpeed = 5f;
-	public float Acceleration = 1f;
+	[SerializeField]
+	private float MaxSpeed = 5f;
+	[SerializeField]
+	private float Acceleration = 1f;
 
 	private float horizontalSpeed;
 	private float verticalSpeed;
@@ -15,47 +17,28 @@ public class GetBigMovement : MonoBehaviour
 	{
 		horizontalSpeed = 0f;
 		verticalSpeed = 0f;
-		movementVector = Vector3.zero;
+		movementVector = Vector3.forward;
 	}
 
 	private void Update()
 	{
-		var h = Input.GetAxisRaw("Horizontal");
-		var v = Input.GetAxisRaw("Vertical");
-		horizontalSpeed = AcceleratedMovement(h, horizontalSpeed);
-		movementVector.x = horizontalSpeed;
-		transform.Translate(movementVector);
+		horizontalSpeed = AcceleratedMovement(horizontalSpeed);
+		transform.Translate(movementVector * horizontalSpeed);
 	}
 
-	private float AcceleratedMovement(float axis, float speed)
+	private float AcceleratedMovement(float speed)
 	{
 		float result = speed;
-		//move with acceleration
-		if(axis != 0)
+		result = result + Acceleration * Time.deltaTime;
+		if(result >= MaxSpeed)
 		{
-			var resultSpeed = result + (axis * Acceleration * Time.deltaTime);
-			if(Mathf.Abs(resultSpeed) < MaxSpeed)
-			{
-				result = result + (axis * Acceleration * Time.deltaTime);
-			}
-			else
-			{
-				result = MaxSpeed * axis;
-			}
-		}
-		//stop and decelerate.
-		else
-		{
-			var sign = Mathf.Sign(result);
-			if(Mathf.Abs(result) > 0.01)
-			{
-				result = result + (-sign * Acceleration * Time.deltaTime);
-			}
-			else
-			{
-				result = 0f;
-			}
+			result = MaxSpeed;
 		}
 		return result;
+	}
+
+	public void SetMaxSpeed(float newSpeed)
+	{
+		MaxSpeed = newSpeed < 0.1f ? 0.1f : newSpeed;
 	}
 }

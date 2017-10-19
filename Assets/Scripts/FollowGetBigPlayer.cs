@@ -4,21 +4,32 @@ using UnityEngine;
 
 public class FollowGetBigPlayer : MonoBehaviour 
 {
-	public Transform GetBigPlayerTransform;
 
-	private Vector3 offset;
-	private Vector3 movementVector;
+	[SerializeField]
+	private float acceleration;
+	[SerializeField]
+	private float maxSpeed;
+	private float speed;
 
 	private void Start()
 	{
-		offset = GetBigPlayerTransform.position - transform.position;
-		movementVector = transform.position;
+		speed = 0f;
 	}
 
-	private void LateUpdate()
+	private void Update()
 	{
-		var newPos = GetBigPlayerTransform.position + offset;
-		movementVector.z = newPos.z;
-		transform.position = movementVector;
+		speed = MoveCamera();
+		transform.Translate(Vector3.forward * speed);
+	}
+
+	private float MoveCamera()
+	{
+		var result = speed;
+		result = result + acceleration * Time.deltaTime;
+		if(result >= maxSpeed)
+		{
+			result = maxSpeed;
+		}
+		return result;
 	}
 }
